@@ -57,15 +57,20 @@ export class AuthService {
   }
 
   async login(data: { email: string; password: string }) {
-    const user = await this.userRepository.findOne({
-      where: { email: data.email },
-    });
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.password')
+      .where('user.email = :email', { email: data.email })
+      .getOne();
 
     if (!user) {
       throw new BadRequestException('Invalid credentials');
     }
 
-    const isPasswordValid = await bcrypt.compare(data.password, user.password);
+    const isPasswordValid = await bcrypt.compare(
+      data.password,
+      user.password,
+    );
 
     if (!isPasswordValid) {
       throw new BadRequestException('Invalid credentials');
