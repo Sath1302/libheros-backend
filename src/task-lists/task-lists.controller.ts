@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { TaskListsService } from './task-lists.service';
@@ -21,13 +22,14 @@ export class TaskListsController {
     body: {
       name: string;
     },
+    @Req() req: any,
   ) {
-    return this.taskListsService.create(body);
+    return this.taskListsService.create(body, req.user.userId);
   }
 
   @Get()
-  findAll() {
-    return this.taskListsService.findAll();
+  findAll(@Req() req: any) {
+    return this.taskListsService.findAll(req.user.userId);
   }
 
   @Delete(':id')
