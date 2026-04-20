@@ -49,4 +49,19 @@ export class TasksService {
       order: { createdAt: 'DESC' },
     });
   }
+
+  async toggleComplete(id: number, isCompleted: boolean) {
+    const task = await this.taskRepository.findOne({
+      where: { id },
+      relations: ['taskList'],
+    });
+
+    if (!task) {
+      throw new BadRequestException('Task not found');
+    }
+
+    task.isCompleted = isCompleted;
+
+    return this.taskRepository.save(task);
+  }
 }

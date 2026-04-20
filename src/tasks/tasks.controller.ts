@@ -1,7 +1,17 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
 @Controller('tasks')
+@UseGuards(JwtAuthGuard)
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
@@ -21,5 +31,13 @@ export class TasksController {
   @Get('task-list/:taskListId')
   findByTaskList(@Param('taskListId') taskListId: string) {
     return this.tasksService.findByTaskList(Number(taskListId));
+  }
+
+  @Patch(':id/complete')
+  toggleComplete(
+    @Param('id') id: string,
+    @Body() body: { isCompleted: boolean },
+  ) {
+    return this.tasksService.toggleComplete(Number(id), body.isCompleted);
   }
 }
