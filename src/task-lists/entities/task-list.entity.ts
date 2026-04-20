@@ -18,6 +18,6 @@ export class TaskList {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.taskLists)
   owner: User;
 }
