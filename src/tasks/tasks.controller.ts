@@ -5,9 +5,11 @@ import {
   Param,
   Patch,
   Post,
-  Req,
+  Delete,
   UseGuards,
+  Request,
 } from '@nestjs/common';
+
 import { TasksService } from './tasks.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
@@ -25,7 +27,7 @@ export class TasksController {
       dueDate: string;
       taskListId: number;
     },
-    @Req() req: any,
+    @Request() req,
   ) {
     return this.tasksService.create(body, req.user.userId);
   }
@@ -33,7 +35,7 @@ export class TasksController {
   @Get('task-list/:taskListId')
   findByTaskList(
     @Param('taskListId') taskListId: string,
-    @Req() req: any,
+    @Request() req,
   ) {
     return this.tasksService.findByTaskList(
       Number(taskListId),
@@ -45,11 +47,22 @@ export class TasksController {
   toggleComplete(
     @Param('id') id: string,
     @Body() body: { isCompleted: boolean },
-    @Req() req: any,
+    @Request() req,
   ) {
     return this.tasksService.toggleComplete(
       Number(id),
       body.isCompleted,
+      req.user.userId,
+    );
+  }
+
+  @Delete(':id')
+  delete(
+    @Param('id') id: string,
+    @Request() req,
+  ) {
+    return this.tasksService.delete(
+      Number(id),
       req.user.userId,
     );
   }

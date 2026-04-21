@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -10,6 +10,7 @@ export class TasksService {
   constructor(
     @InjectRepository(Task)
     private taskRepository: Repository<Task>,
+
     @InjectRepository(TaskList)
     private taskListRepository: Repository<TaskList>,
   ) {}
@@ -26,9 +27,7 @@ export class TasksService {
     const taskList = await this.taskListRepository.findOne({
       where: {
         id: data.taskListId,
-        owner: {
-          id: userId,
-        },
+        owner: { id: userId },
       },
       relations: ['owner'],
     });
@@ -48,24 +47,11 @@ export class TasksService {
   }
 
   async findByTaskList(taskListId: number, userId: number) {
-    const taskList = await this.taskListRepository.findOne({
-      where: {
-        id: taskListId,
-        owner: {
-          id: userId,
-        },
-      },
-      relations: ['owner'],
-    });
-
-    if (!taskList) {
-      throw new BadRequestException('Task list not found');
-    }
-
     return this.taskRepository.find({
       where: {
         taskList: {
           id: taskListId,
+          owner: { id: userId },
         },
       },
       relations: ['taskList'],
@@ -78,9 +64,7 @@ export class TasksService {
       where: {
         id,
         taskList: {
-          owner: {
-            id: userId,
-          },
+          owner: { id: userId },
         },
       },
       relations: ['taskList', 'taskList.owner'],
@@ -93,5 +77,27 @@ export class TasksService {
     task.isCompleted = isCompleted;
 
     return this.taskRepository.save(task);
+  }
+
+  async delete(id: number, userId: number) {
+    const task = await this.taskRepository.findOne({
+      where: {
+        id,
+        taskList: {
+          owner: { id: userId },
+        },
+      },
+      relations: ['taskList', 'taskList.owner'],
+    });
+
+    if (!task) {
+      throw new BadRequestException('Task not found');
+    }
+
+    await this.taskRepository.remove(task);
+
+    return {
+      message: 'Task deleted successfully',
+    };
   }
 }
