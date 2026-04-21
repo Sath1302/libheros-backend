@@ -143,6 +143,7 @@ export class TasksService {
       shortDescription?: string;
       longDescription?: string;
       dueDate?: string;
+      isCompleted?: boolean;
     },
     userId: number,
   ) {
@@ -170,6 +171,10 @@ export class TasksService {
 
     if (data.dueDate !== undefined) {
       task.dueDate = new Date(data.dueDate);
+    }
+
+    if (data.isCompleted !== undefined) {
+      task.isCompleted = data.isCompleted;
     }
 
     const updatedTask = await this.taskRepository.save(task);
