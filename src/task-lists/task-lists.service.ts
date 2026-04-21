@@ -10,6 +10,7 @@ export class TaskListsService {
   constructor(
     @InjectRepository(TaskList)
     private taskListRepository: Repository<TaskList>,
+
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
@@ -36,19 +37,30 @@ export class TaskListsService {
       owner: user,
     });
 
-    return this.taskListRepository.save(taskList);
+    const saved = await this.taskListRepository.save(taskList);
+
+    return {
+      id: saved.id,
+      name: saved.name,
+      createdAt: saved.createdAt,
+    };
   }
 
   async findAll(userId: number) {
-    return this.taskListRepository.find({
+    const lists = await this.taskListRepository.find({
       where: {
         owner: {
           id: userId,
         },
       },
-      relations: ['owner'],
       order: { createdAt: 'DESC' },
     });
+
+    return lists.map((list) => ({
+      id: list.id,
+      name: list.name,
+      createdAt: list.createdAt,
+    }));
   }
 
   async update(id: number, data: { name: string }, userId: number) {
@@ -59,7 +71,6 @@ export class TaskListsService {
           id: userId,
         },
       },
-      relations: ['owner'],
     });
 
     if (!taskList) {
@@ -76,7 +87,13 @@ export class TaskListsService {
 
     taskList.name = data.name;
 
-    return this.taskListRepository.save(taskList);
+    const saved = await this.taskListRepository.save(taskList);
+
+    return {
+      id: saved.id,
+      name: saved.name,
+      createdAt: saved.createdAt,
+    };
   }
 
   async remove(id: number) {
