@@ -27,6 +27,8 @@ export class Task {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => TaskList)
+  @ManyToOne(() => TaskList, (taskList) => taskList.tasks, {
+    onDelete: 'CASCADE',
+  })
   taskList: TaskList;
 }

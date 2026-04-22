@@ -17,7 +17,10 @@ export class TaskListsService {
 
   async create(data: { name: string }, userId: number) {
     const existingList = await this.taskListRepository.findOne({
-      where: { name: data.name },
+      where: {
+        name: data.name,
+        owner: { id: userId },
+      },
     });
 
     if (existingList) {
@@ -78,7 +81,10 @@ export class TaskListsService {
     }
 
     const existingList = await this.taskListRepository.findOne({
-      where: { name: data.name },
+      where: {
+        name: data.name,
+        owner: { id: userId },
+      },
     });
 
     if (existingList && existingList.id !== id) {
@@ -96,9 +102,14 @@ export class TaskListsService {
     };
   }
 
-  async remove(id: number) {
+  async remove(id: number, userId: number) {
     const taskList = await this.taskListRepository.findOne({
-      where: { id },
+      where: {
+        id,
+        owner: {
+          id: userId,
+        },
+      },
     });
 
     if (!taskList) {

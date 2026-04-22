@@ -1,18 +1,8 @@
-# Libheros Backend
+# Libheros – Backend
 
-Backend du test technique Libheros développé avec NestJS, TypeORM et PostgreSQL.
+Ce repository contient la partie backend du test technique Libheros. L’API permet la gestion des utilisateurs, des listes de tâches et des tâches associées, avec authentification sécurisée via JWT.
 
-## Fonctionnalités
-
-- Authentification avec JWT
-- Inscription utilisateur
-- Connexion utilisateur
-- Récupération du profil utilisateur connecté
-- Gestion des listes de tâches
-- Gestion des tâches
-- Sécurisation des routes avec JWT
-- Isolation des données par utilisateur
-- Réponses API nettoyées
+Le projet est développé avec NestJS, TypeORM et PostgreSQL.
 
 ## Stack technique
 
@@ -23,13 +13,32 @@ Backend du test technique Libheros développé avec NestJS, TypeORM et PostgreSQ
 - JWT
 - bcrypt
 
-## Installation
+## Fonctionnalités implémentées
 
-Cloner le projet :
+L’API permet :
 
-git clone https://github.com/Sath1302/libheros-backend.git
+- l’inscription d’un utilisateur
+- la connexion avec génération d’un token JWT
+- la récupération du profil utilisateur connecté
+- la création d’une liste
+- la modification d’une liste
+- la suppression d’une liste (avec suppression des tâches associées)
+- la création d’une tâche
+- la modification d’une tâche
+- la suppression d’une tâche
+- le changement de statut d’une tâche
 
-Puis :
+Toutes les routes liées aux listes et aux tâches sont protégées par authentification.
+
+Chaque utilisateur ne peut accéder qu’à ses propres données.
+
+## Installation du projet
+
+Cloner le repository :
+
+git clone LIEN_DU_REPO_BACK
+
+Se placer dans le dossier :
 
 cd libheros-backend
 
@@ -37,69 +46,63 @@ Installer les dépendances :
 
 npm install
 
-## Configuration
+## Configuration des variables d’environnement
 
-Créer un fichier .env à la racine du projet avec :
+Créer un fichier .env à la racine du projet :
 
 PORT=3000
+
 DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
 DB_NAME=libheros
-JWT_SECRET=super_secret_key
 
-## Lancer le projet
+JWT_SECRET=secret_jwt
+
+Adapter les valeurs selon votre configuration locale PostgreSQL.
+
+## Base de données
+
+Créer une base PostgreSQL nommée :
+
+libheros
+
+Puis vérifier que les informations correspondent au fichier .env.
+
+## Lancement du projet
+
+Démarrer le serveur :
 
 npm run start:dev
 
-## Authentification
+Le backend sera accessible à l’adresse :
 
-Workflow :
-
-1. créer un utilisateur avec /auth/register
-2. se connecter avec /auth/login
-3. récupérer le access_token
-4. utiliser ce token dans les routes protégées avec Bearer Token
+http://localhost:3000
 
 ## Endpoints principaux
 
-Auth
+Authentification
 
 POST /auth/register  
 POST /auth/login  
 GET /auth/profile  
 
-Task lists
+Listes
 
 POST /task-lists  
 GET /task-lists  
 PATCH /task-lists/:id  
 DELETE /task-lists/:id  
 
-Tasks
+Tâches
 
 POST /tasks  
-GET /tasks/:id  
 GET /tasks/task-list/:taskListId  
+GET /tasks/:id  
 PATCH /tasks/:id  
-PATCH /tasks/:id/complete  
 DELETE /tasks/:id  
-
-## Sécurité
-
-- Routes protégées par JWT
-- Accès limité aux données de l'utilisateur connecté
-- Mot de passe jamais exposé dans les réponses API
-
-## Organisation Git
-
-Le projet utilise :
-
-- main
-- develop
-- feature branches
 
 ## Auteur
 
-Projet réalisé par Sathu dans le cadre du test technique Libheros.
+Test technique réalisé par NOM PRENOM
