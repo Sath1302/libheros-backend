@@ -1,4 +1,4 @@
-Libheros – Backend
+## Libheros – Backend - Sathush Sebamalai
 
 Bonjour , je vais simplement vous expliquer comment ouvrir le projet localement et testé meme si je pense que vous savez deja comment faire , j'ai séparé le back et le front comme lors de ma SAE de fin d'année je trouvais ca plus simple et facile a comprendre.
 
@@ -12,15 +12,15 @@ Il permet de gérer l’authentification utilisateur ainsi que les listes de tâ
 
 ## Installation
 
-Cloner le repository :
+Il faut cloner le repository :
 
 git clone https://github.com/Sath1302/libheros-backend
 
-Se placer dans le dossier :
+puis se placer dans le dossier :
 
 cd libheros-backend
 
-Installer les dépendances :
+Ensuite il faudra installer les dépendances :
 
 npm install
 
@@ -47,7 +47,7 @@ Démarrer le serveur avec :
 
 npm run start:dev
 
-Le backend sera accessible sur :
+Le backend sera accessible sur puis c'est après avoir fait tous ca que le front end marchera :) 
 
 http://localhost:3000
 
