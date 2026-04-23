@@ -38,9 +38,8 @@ DB_NAME=libheros
 
 JWT_SECRET=secret_jwt
 
-Créer ensuite une base PostgreSQL nommée :
-
-libheros
+Créer une base PostgreSQL vide nommée **libheros** avant de lancer le backend.
+et ne vous inquiétez pas les tables sont créées automatiquement au lancement grâce à TypeORM.
 
 ## Lancer le projet
 
