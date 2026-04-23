@@ -105,5 +105,5 @@ Ce projet a été réalisé dans le cadre du test technique Libheros dans le but
 
 ## Auteur
 
-NOM PRENOM
-BUT Informatique
+SEBAMALAI Sathush
+BUT Informatique - Université Paris Cité
