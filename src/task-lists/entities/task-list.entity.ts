@@ -20,11 +20,11 @@ export class TaskList {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, (user) => user.taskLists, {
+    onDelete: 'CASCADE',
+  })
   owner: User;
 
-  @OneToMany(() => Task, (task) => task.taskList, {
-    cascade: true,
-  })
+  @OneToMany(() => Task, (task) => task.taskList)
   tasks: Task[];
 }

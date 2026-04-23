@@ -106,37 +106,6 @@ export class TasksService {
     return this.formatTask(task);
   }
 
-  async toggleComplete(id: number, isCompleted: boolean, userId: number) {
-    const task = await this.taskRepository.findOne({
-      where: {
-        id,
-        taskList: {
-          owner: { id: userId },
-        },
-      },
-      relations: ['taskList'],
-    });
-
-    if (!task) {
-      throw new BadRequestException('Task not found');
-    }
-
-    task.isCompleted = isCompleted;
-
-    const updatedTask = await this.taskRepository.save(task);
-
-    const foundTask = await this.taskRepository.findOne({
-      where: { id: updatedTask.id },
-      relations: ['taskList'],
-    });
-
-    if (!foundTask) {
-      throw new BadRequestException('Task not found');
-    }
-
-    return this.formatTask(foundTask);
-  }
-
   async update(
     id: number,
     data: {

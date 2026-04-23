@@ -39,11 +39,7 @@ export class TaskListsController {
     @Body() body: { name: string },
     @Req() req: any,
   ) {
-    return this.taskListsService.update(
-      Number(id),
-      body,
-      req.user.userId,
-    );
+    return this.taskListsService.update(Number(id), body, req.user.userId);
   }
 
   @Delete(':id')

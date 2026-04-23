@@ -9,7 +9,6 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-
 import { TasksService } from './tasks.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth/jwt-auth.guard';
 
@@ -19,16 +18,22 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post()
-  create(@Body() body: any, @Req() req: any) {
+  create(
+    @Body()
+    body: {
+      shortDescription: string;
+      longDescription?: string;
+      dueDate: string;
+      taskListId: number;
+    },
+    @Req() req: any,
+  ) {
     return this.tasksService.create(body, req.user.userId);
   }
 
   @Get('task-list/:taskListId')
   findByTaskList(@Param('taskListId') taskListId: string, @Req() req: any) {
-    return this.tasksService.findByTaskList(
-      Number(taskListId),
-      req.user.userId,
-    );
+    return this.tasksService.findByTaskList(Number(taskListId), req.user.userId);
   }
 
   @Get(':id')
