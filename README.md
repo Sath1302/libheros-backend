@@ -8,7 +8,7 @@ Il permet de gérer l’authentification utilisateur ainsi que les listes de tâ
 
 Cloner le repository :
 
-git clone LIEN_DU_REPO_BACK
+git clone https://github.com/Sath1302/libheros-backend
 
 Se placer dans le dossier :
 
