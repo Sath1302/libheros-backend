@@ -1,5 +1,11 @@
 # Libheros – Backend
 
+Bonjour Monsieur Florian Compiegne j'espere que vous allez bien je vais simplement vous expliquer comment ouvrir le projet localement et testé meme si je pense que vous savez deja comment faire , j'ai séparé le back et le front comme lors de ma SAE de fin d'année je trouvais ca plus simple et facile a comprendre.
+
+Bien cordialement , 
+
+Sathush Sebamalai 
+
 Ce repository contient le backend du test technique Libheros réalisé avec NestJS.
 
 Il permet de gérer l’authentification utilisateur ainsi que les listes de tâches et les tâches associées via une API sécurisée avec JWT.
