@@ -1,26 +1,20 @@
-## Libheros – Backend - Sathush Sebamalai
-
-Bonjour , je vais simplement vous expliquer comment ouvrir le projet localement et testé meme si je pense que vous savez deja comment faire , j'ai séparé le back et le front pour des raisons de Clean Architecture vu pendant ma SAE de fin d'année je trouvais ca plus simple et facile a comprendre.
-
-Bien cordialement , 
-
-Sathush Sebamalai 
+# Libheros – Backend
 
 Ce repository contient le backend du test technique Libheros réalisé avec NestJS.
 
-Il permet de gérer l’authentification utilisateur ainsi que les listes de tâches et les tâches associées via une API sécurisée avec JWT.
+Il gère l’authentification utilisateur ainsi que les listes de tâches et les tâches associées via une API sécurisée avec JWT.
 
 ## Installation
 
-Il faut cloner le repository :
+Cloner le repository :
 
 git clone https://github.com/Sath1302/libheros-backend
 
-puis se placer dans le dossier :
+Puis se placer dans le dossier :
 
 cd libheros-backend
 
-Ensuite il faudra installer les dépendances :
+Installer les dépendances :
 
 npm install
 
@@ -34,12 +28,13 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
-DB_NAME=libheros
+DB_NAME=libheros_demo
 
 JWT_SECRET=secret_jwt
 
-Créer une base PostgreSQL vide nommée **libheros** avant de lancer le backend.
-et ne vous inquiétez pas les tables sont créées automatiquement au lancement grâce à TypeORM.
+Créer ensuite une base PostgreSQL vide nommée **libheros**.
+
+Les tables sont créées automatiquement au lancement grâce à TypeORM.
 
 ## Lancer le projet
 
@@ -47,9 +42,9 @@ Démarrer le serveur avec :
 
 npm run start:dev
 
-Le backend sera accessible sur puis c'est après avoir fait tous ca que le front end marchera :) 
+Le backend sera accessible sur :
 
 http://localhost:3000
 
 SEBAMALAI Sathush
-BUT Informatique - Université Paris Cité
+BUT Informatique – Université Paris Cité
