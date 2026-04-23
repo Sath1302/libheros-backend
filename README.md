@@ -1,54 +1,32 @@
-# Libheros – Backend
+## Libheros – Backend - Sathush Sebamalai
 
-Ce repository contient la partie backend du test technique Libheros. L’API permet la gestion des utilisateurs, des listes de tâches et des tâches associées, avec authentification sécurisée via JWT.
+Bonjour , je vais simplement vous expliquer comment ouvrir le projet localement et testé meme si je pense que vous savez deja comment faire , j'ai séparé le back et le front pour des raisons de Clean Architecture vu pendant ma SAE de fin d'année je trouvais ca plus simple et facile a comprendre.
 
-Le projet est développé avec NestJS, TypeORM et PostgreSQL.
+Bien cordialement , 
 
-## Stack technique
+Sathush Sebamalai 
 
-- NestJS
-- TypeScript
-- TypeORM
-- PostgreSQL
-- JWT
-- bcrypt
+Ce repository contient le backend du test technique Libheros réalisé avec NestJS.
 
-## Fonctionnalités implémentées
+Il permet de gérer l’authentification utilisateur ainsi que les listes de tâches et les tâches associées via une API sécurisée avec JWT.
 
-L’API permet :
+## Installation
 
-- l’inscription d’un utilisateur
-- la connexion avec génération d’un token JWT
-- la récupération du profil utilisateur connecté
-- la création d’une liste
-- la modification d’une liste
-- la suppression d’une liste (avec suppression des tâches associées)
-- la création d’une tâche
-- la modification d’une tâche
-- la suppression d’une tâche
-- le changement de statut d’une tâche
+Il faut cloner le repository :
 
-Toutes les routes liées aux listes et aux tâches sont protégées par authentification.
+git clone https://github.com/Sath1302/libheros-backend
 
-Chaque utilisateur ne peut accéder qu’à ses propres données.
-
-## Installation du projet
-
-Cloner le repository :
-
-git clone LIEN_DU_REPO_BACK
-
-Se placer dans le dossier :
+puis se placer dans le dossier :
 
 cd libheros-backend
 
-Installer les dépendances :
+Ensuite il faudra installer les dépendances :
 
 npm install
 
-## Configuration des variables d’environnement
+## Configuration
 
-Créer un fichier .env à la racine du projet :
+Créer un fichier `.env` à la racine du projet avec par exemple :
 
 PORT=3000
 
@@ -60,49 +38,18 @@ DB_NAME=libheros
 
 JWT_SECRET=secret_jwt
 
-Adapter les valeurs selon votre configuration locale PostgreSQL.
+Créer une base PostgreSQL vide nommée **libheros** avant de lancer le backend.
+et ne vous inquiétez pas les tables sont créées automatiquement au lancement grâce à TypeORM.
 
-## Base de données
+## Lancer le projet
 
-Créer une base PostgreSQL nommée :
-
-libheros
-
-Puis vérifier que les informations correspondent au fichier .env.
-
-## Lancement du projet
-
-Démarrer le serveur :
+Démarrer le serveur avec :
 
 npm run start:dev
 
-Le backend sera accessible à l’adresse :
+Le backend sera accessible sur puis c'est après avoir fait tous ca que le front end marchera :) 
 
 http://localhost:3000
 
-## Endpoints principaux
-
-Authentification
-
-POST /auth/register  
-POST /auth/login  
-GET /auth/profile  
-
-Listes
-
-POST /task-lists  
-GET /task-lists  
-PATCH /task-lists/:id  
-DELETE /task-lists/:id  
-
-Tâches
-
-POST /tasks  
-GET /tasks/task-list/:taskListId  
-GET /tasks/:id  
-PATCH /tasks/:id  
-DELETE /tasks/:id  
-
-## Auteur
-
-Test technique réalisé par NOM PRENOM
+SEBAMALAI Sathush
+BUT Informatique - Université Paris Cité
